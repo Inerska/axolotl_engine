@@ -172,10 +172,11 @@ set_target_properties(tests PROPERTIES OUTPUT_NAME "tests")
 set_target_properties(tests PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/macosx/arm64/release")
 add_dependencies(tests game_engine)
 target_include_directories(tests PRIVATE
+    tests
     include
 )
 target_include_directories(tests SYSTEM PRIVATE
-    /Users/alexischangridel/.xmake/packages/c/catch2/v3.5.2/3de57a31a48248e9bfac210574bd2a1e/include
+    /Users/alexischangridel/.conan2/p/b/catchde6e7c5f50421/p/include
     /Users/alexischangridel/.xmake/packages/g/glfw/3.4/3ce34c98157445c898b9d2bf71391976/include
     /Users/alexischangridel/.xmake/packages/g/glad/v0.1.36/b9aabdf137ee4a559638b73910de1f9d/include
     /Users/alexischangridel/.xmake/packages/g/glm/0.9.9+8/96c3bd80cd30491490e3720040823000/include
@@ -228,7 +229,7 @@ target_link_libraries(tests PRIVATE
     "-framework OpenGL"
 )
 target_link_directories(tests PRIVATE
-    /Users/alexischangridel/.xmake/packages/c/catch2/v3.5.2/3de57a31a48248e9bfac210574bd2a1e/lib
+    /Users/alexischangridel/.conan2/p/b/catchde6e7c5f50421/p/lib
     /Users/alexischangridel/.xmake/packages/g/glfw/3.4/3ce34c98157445c898b9d2bf71391976/lib
     /Users/alexischangridel/.xmake/packages/g/glad/v0.1.36/b9aabdf137ee4a559638b73910de1f9d/lib
     /Users/alexischangridel/.conan2/p/b/spdlo7f4174cde3d73/p/lib
@@ -243,8 +244,8 @@ target_link_options(tests PRIVATE
     -lz
 )
 target_sources(tests PRIVATE
-    tests/core/game_loop_tests.hpp
-    tests/input/input_manager_tests.hpp
-    tests/graphics/renderer_tests.hpp
+    tests/core/game_loop_tests.cpp
+    tests/input/input_manager_tests.cpp
+    tests/graphics/renderer_tests.cpp
 )
 
