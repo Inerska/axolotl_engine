@@ -1,23 +1,18 @@
-#include <glfw/glfw3.h>
+#include <game_engine/core/game_loop.hpp>
+#include <spdlog/spdlog.h>
 
 int main() {
+    spdlog::info("Starting Game Engine");
 
-    if (!glfwInit()) {
+    game_engine::core::GameLoop game_loop{};
+
+    if (game_loop.initialize() != game_engine::core::Result::Success) {
+        spdlog::error("Failed to initialize GameLoop");
         return -1;
     }
 
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    game_loop.run();
 
-    if (!window) {
-        glfwTerminate();
-        return -1;
-    }
-
-    glfwMakeContextCurrent(window);
-
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-    }
-
+    spdlog::info("Game Engine shutdown complete");
     return 0;
 }
