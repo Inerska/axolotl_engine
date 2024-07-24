@@ -1,36 +1,10 @@
-# Build directories
+# Xmake cache
+.xmake/
 build/
-cmake-build-*/
 
-# IDE files
-.vscode/
-.idea/
-
-# Conan files
-conan.lock
-conanbuildinfo.*
-conaninfo.*
-graph_info.json
-
-# CMake files
-CMakeCache.txt
-CMakeFiles/
-cmake_install.cmake
-compile_commands.json
-
-# Compiled files
-*.o
-*.obj
-*.exe
-*.out
-*.app
-*.dll
-*.so
-*.dylib
-
-# macOS files
+# MacOS Cache
 .DS_Store
 
-# Temporary files
-*.swp
-*~
+.idea/
+
+cmake-build-debug/
