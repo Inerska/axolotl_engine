@@ -23,7 +23,6 @@ target_include_directories(game_engine SYSTEM PRIVATE
     /Users/alexischangridel/.xmake/packages/g/glm/0.9.9+8/96c3bd80cd30491490e3720040823000/include
     /Users/alexischangridel/.conan2/p/b/spdlo7f4174cde3d73/p/include
     /Users/alexischangridel/.conan2/p/b/fmt091f5cc7d47ee/p/include
-    /Users/alexischangridel/.conan2/p/dia0f6529019f9b/p/include
     /Users/alexischangridel/.xmake/packages/e/entt/v3.13.1/038bc52dfbed4cc58e060b88c0894b62/include
 )
 target_compile_definitions(game_engine PRIVATE
@@ -31,7 +30,6 @@ target_compile_definitions(game_engine PRIVATE
     GL_SILENCE_DEPRECATION
     SPDLOG_FMT_EXTERNAL
     SPDLOG_COMPILED_LIB
-    BOOST_DI_CFG_DIAGNOSTICS_LEVEL=1
 )
 target_compile_options(game_engine PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-target>
@@ -87,11 +85,11 @@ target_sources(game_engine PRIVATE
     src/infrastructure/renderer.cpp
     src/presentation/game_loop.cpp
     src/main.cpp
+    include/game_engine/core/di_container.hpp
     include/game_engine/core/types.hpp
     include/game_engine/infrastructure/ecs_manager.hpp
     include/game_engine/infrastructure/input_manager.hpp
     include/game_engine/infrastructure/renderer.hpp
-    include/game_engine/infrastructure/test.hpp
     include/game_engine/domain/system.hpp
     include/game_engine/domain/component.hpp
     include/game_engine/domain/entity.hpp
@@ -112,7 +110,6 @@ target_include_directories(game_engine_exe SYSTEM PRIVATE
     /Users/alexischangridel/.xmake/packages/g/glm/0.9.9+8/96c3bd80cd30491490e3720040823000/include
     /Users/alexischangridel/.conan2/p/b/spdlo7f4174cde3d73/p/include
     /Users/alexischangridel/.conan2/p/b/fmt091f5cc7d47ee/p/include
-    /Users/alexischangridel/.conan2/p/dia0f6529019f9b/p/include
     /Users/alexischangridel/.xmake/packages/e/entt/v3.13.1/038bc52dfbed4cc58e060b88c0894b62/include
 )
 target_compile_definitions(game_engine_exe PRIVATE
@@ -120,7 +117,6 @@ target_compile_definitions(game_engine_exe PRIVATE
     GL_SILENCE_DEPRECATION
     SPDLOG_FMT_EXTERNAL
     SPDLOG_COMPILED_LIB
-    BOOST_DI_CFG_DIAGNOSTICS_LEVEL=1
 )
 target_compile_options(game_engine_exe PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-target>

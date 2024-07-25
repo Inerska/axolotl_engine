@@ -7,29 +7,37 @@
 #include <memory>
 
 namespace game_engine::presentation {
-
     class GameLoop {
     public:
-        GameLoop(infrastructure::EcsManager& ecs,
-                 graphics::Renderer& renderer,
-                 input::InputManager& inputManager);
+        GameLoop(
+            std::shared_ptr<infrastructure::EcsManager> ecs,
+            std::shared_ptr<graphics::Renderer> renderer,
+            std::shared_ptr<input::InputManager> inputManager
+        );
 
-        ~GameLoop();
+        ~GameLoop() = default;
 
-        GameLoop(const GameLoop&) = delete;
-        GameLoop& operator=(const GameLoop&) = delete;
-        GameLoop(GameLoop&&) = delete;
-        GameLoop& operator=(GameLoop&&) = delete;
+        GameLoop(const GameLoop &) = delete;
+
+        GameLoop &operator=(const GameLoop &) = delete;
+
+        GameLoop(GameLoop &&) = delete;
+
+        GameLoop &operator=(GameLoop &&) = delete;
 
         core::Result initialize();
+
         void run();
 
     private:
-        class Impl;
-        core::UniquePtr<Impl> m_pImpl;
-
         void update(float deltaTime);
-        void render();
-    };
 
+        void render();
+
+        std::shared_ptr<infrastructure::EcsManager> m_ecs;
+        std::shared_ptr<graphics::Renderer> m_renderer;
+        std::shared_ptr<input::InputManager> m_inputManager;
+
+        float m_lastFrame = 0.0f;
+    };
 } // namespace game_engine::presentation
