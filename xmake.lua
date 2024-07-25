@@ -48,7 +48,7 @@ end
 
 rule("plugin.cmake.autoreload")
 set_kind("project")
-after_build(function (target)
+after_build(function (_)
     import("core.project.config")
     import("core.project.depend")
     import("core.project.project")
