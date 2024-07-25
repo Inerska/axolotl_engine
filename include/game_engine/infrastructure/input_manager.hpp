@@ -1,6 +1,6 @@
 #pragma once
 
-#include <game_engine/core/types.hpp>
+#include <../core/types.hpp>
 #include <memory>
 
 struct GLFWwindow;

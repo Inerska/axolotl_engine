@@ -1,6 +1,6 @@
 #include <game_engine/core/game_loop.hpp>
-#include <game_engine/graphics/renderer.hpp>
-#include <game_engine/input/input_manager.hpp>
+#include <../../include/game_engine/infrastructure/renderer.hpp>
+#include <../../include/game_engine/infrastructure/input_manager.hpp>
 #include <glad/glad.h>
 #include <spdlog/spdlog.h>
 #include <GLFW/glfw3.h>

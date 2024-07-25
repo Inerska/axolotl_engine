@@ -1,4 +1,4 @@
-#include <game_engine/graphics/renderer.hpp>
+#include <../../include/game_engine/infrastructure/renderer.hpp>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>

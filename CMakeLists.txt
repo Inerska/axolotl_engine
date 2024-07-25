@@ -23,12 +23,14 @@ target_include_directories(game_engine SYSTEM PRIVATE
     /Users/alexischangridel/.xmake/packages/g/glm/0.9.9+8/96c3bd80cd30491490e3720040823000/include
     /Users/alexischangridel/.conan2/p/b/spdlo7f4174cde3d73/p/include
     /Users/alexischangridel/.conan2/p/b/fmt091f5cc7d47ee/p/include
+    /Users/alexischangridel/.conan2/p/dia0f6529019f9b/p/include
 )
 target_compile_definitions(game_engine PRIVATE
     GLFW_INCLUDE_NONE
     GL_SILENCE_DEPRECATION
     SPDLOG_FMT_EXTERNAL
     SPDLOG_COMPILED_LIB
+    BOOST_DI_CFG_DIAGNOSTICS_LEVEL=1
 )
 target_compile_options(game_engine PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-target>
@@ -80,14 +82,19 @@ target_link_options(game_engine PRIVATE
     -lz
 )
 target_sources(game_engine PRIVATE
-    src/core/game_loop.cpp
-    src/input/input_manager.cpp
-    src/graphics/renderer.cpp
+    src/infrastructure/input_manager.cpp
+    src/infrastructure/renderer.cpp
+    src/infrastructure/game_loop.cpp
     src/main.cpp
     include/game_engine/core/game_loop.hpp
     include/game_engine/core/types.hpp
-    include/game_engine/input/input_manager.hpp
-    include/game_engine/graphics/renderer.hpp
+    include/game_engine/infrastructure/ecs_manager.hpp
+    include/game_engine/infrastructure/input_manager.hpp
+    include/game_engine/infrastructure/renderer.hpp
+    include/game_engine/domain/system.hpp
+    include/game_engine/domain/component.hpp
+    include/game_engine/domain/entity.hpp
+    include/game_engine/presentation/game_loop.hpp
 )
 
 # target
@@ -104,12 +111,14 @@ target_include_directories(game_engine_exe SYSTEM PRIVATE
     /Users/alexischangridel/.xmake/packages/g/glm/0.9.9+8/96c3bd80cd30491490e3720040823000/include
     /Users/alexischangridel/.conan2/p/b/spdlo7f4174cde3d73/p/include
     /Users/alexischangridel/.conan2/p/b/fmt091f5cc7d47ee/p/include
+    /Users/alexischangridel/.conan2/p/dia0f6529019f9b/p/include
 )
 target_compile_definitions(game_engine_exe PRIVATE
     GLFW_INCLUDE_NONE
     GL_SILENCE_DEPRECATION
     SPDLOG_FMT_EXTERNAL
     SPDLOG_COMPILED_LIB
+    BOOST_DI_CFG_DIAGNOSTICS_LEVEL=1
 )
 target_compile_options(game_engine_exe PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-target>

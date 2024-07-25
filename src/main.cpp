@@ -1,18 +1,23 @@
-#include <game_engine/core/game_loop.hpp>
-#include <spdlog/spdlog.h>
+#include <game_engine/presentation/game_loop.hpp>
+#include <game_engine/infrastructure/ecs_manager.hpp>
+#include <game_engine/infrastructure/renderer.hpp>
+#include <game_engine/infrastructure/input_manager.hpp>
+#include <boost/di.hpp>
+
+namespace di = boost::di;
 
 int main() {
-    spdlog::info("Starting Game Engine");
+    const auto injector = make_injector(
+        di::bind<game_engine::infrastructure::EcsManager>().to<game_engine::infrastructure::EcsManager>(),
+        di::bind<game_engine::graphics::Renderer>().to<game_engine::graphics::Renderer>(),
+        di::bind<game_engine::input::InputManager>().to<game_engine::input::InputManager>()
+    );
 
-    game_engine::core::GameLoop game_loop{};
+    auto game_loop = injector.create<game_engine::presentation::GameLoop>();
 
-    if (game_loop.initialize() != game_engine::core::Result::Success) {
-        spdlog::error("Failed to initialize GameLoop");
-        return -1;
+    if (game_loop.initialize() == game_engine::core::Result::Success) {
+        game_loop.run();
     }
 
-    game_loop.run();
-
-    spdlog::info("Game Engine shutdown complete");
     return 0;
 }
