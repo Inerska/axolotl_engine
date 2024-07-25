@@ -1,14 +1,14 @@
 #pragma once
-#include <cstdint>
+#include <glm/glm.hpp>
 
-namespace game_engine::domain {
+namespace game_engine::domain::components {
 
-    class Component {
-    public:
-        using Id = std::uint32_t;
-
-        virtual ~Component() = default;
-        virtual Id getTypeId() const = 0;
+    struct Position {
+        glm::vec3 value;
     };
 
-} // namespace game_engine::domain
+    struct Velocity {
+        glm::vec3 value;
+    };
+
+} // namespace game_engine::domain::components

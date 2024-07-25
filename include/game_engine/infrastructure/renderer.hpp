@@ -1,7 +1,8 @@
 #pragma once
 
-#include <../core/types.hpp>
 #include <memory>
+
+#include "game_engine/core/types.hpp"
 
 namespace game_engine::graphics {
 

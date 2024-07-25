@@ -7,8 +7,8 @@ namespace game_engine::domain {
     public:
         using Id = std::uint32_t;
 
-        explicit Entity(Id id) : m_id(id) {}
-        Id getId() const { return m_id; }
+        explicit Entity(const Id id) : m_id(id) {}
+        [[nodiscard]] Id getId() const { return m_id; }
 
     private:
         Id m_id;

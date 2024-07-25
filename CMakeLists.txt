@@ -24,6 +24,7 @@ target_include_directories(game_engine SYSTEM PRIVATE
     /Users/alexischangridel/.conan2/p/b/spdlo7f4174cde3d73/p/include
     /Users/alexischangridel/.conan2/p/b/fmt091f5cc7d47ee/p/include
     /Users/alexischangridel/.conan2/p/dia0f6529019f9b/p/include
+    /Users/alexischangridel/.xmake/packages/e/entt/v3.13.1/038bc52dfbed4cc58e060b88c0894b62/include
 )
 target_compile_definitions(game_engine PRIVATE
     GLFW_INCLUDE_NONE
@@ -45,7 +46,7 @@ target_compile_options(game_engine PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
 )
 set_target_properties(game_engine PROPERTIES CXX_EXTENSIONS OFF)
-target_compile_features(game_engine PRIVATE cxx_std_20)
+target_compile_features(game_engine PRIVATE cxx_std_23)
 if(MSVC)
     target_compile_options(game_engine PRIVATE $<$<CONFIG:Release>:-Ox -fp:fast>)
 else()
@@ -84,9 +85,8 @@ target_link_options(game_engine PRIVATE
 target_sources(game_engine PRIVATE
     src/infrastructure/input_manager.cpp
     src/infrastructure/renderer.cpp
-    src/infrastructure/game_loop.cpp
+    src/presentation/game_loop.cpp
     src/main.cpp
-    include/game_engine/core/game_loop.hpp
     include/game_engine/core/types.hpp
     include/game_engine/infrastructure/ecs_manager.hpp
     include/game_engine/infrastructure/input_manager.hpp
@@ -112,6 +112,7 @@ target_include_directories(game_engine_exe SYSTEM PRIVATE
     /Users/alexischangridel/.conan2/p/b/spdlo7f4174cde3d73/p/include
     /Users/alexischangridel/.conan2/p/b/fmt091f5cc7d47ee/p/include
     /Users/alexischangridel/.conan2/p/dia0f6529019f9b/p/include
+    /Users/alexischangridel/.xmake/packages/e/entt/v3.13.1/038bc52dfbed4cc58e060b88c0894b62/include
 )
 target_compile_definitions(game_engine_exe PRIVATE
     GLFW_INCLUDE_NONE
@@ -133,7 +134,7 @@ target_compile_options(game_engine_exe PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
 )
 set_target_properties(game_engine_exe PROPERTIES CXX_EXTENSIONS OFF)
-target_compile_features(game_engine_exe PRIVATE cxx_std_20)
+target_compile_features(game_engine_exe PRIVATE cxx_std_23)
 if(MSVC)
     target_compile_options(game_engine_exe PRIVATE $<$<CONFIG:Release>:-Ox -fp:fast>)
 else()
@@ -211,7 +212,7 @@ target_compile_options(tests PRIVATE
     $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
 )
 set_target_properties(tests PROPERTIES CXX_EXTENSIONS OFF)
-target_compile_features(tests PRIVATE cxx_std_20)
+target_compile_features(tests PRIVATE cxx_std_23)
 if(MSVC)
     target_compile_options(tests PRIVATE $<$<CONFIG:Release>:-Ox -fp:fast>)
 else()

@@ -1,34 +1,41 @@
 #pragma once
-#include <game_engine/domain/entity.hpp>
-#include <game_engine/domain/component.hpp>
-#include <game_engine/domain/system.hpp>
-#include <unordered_map>
-#include <memory>
-#include <vector>
+#include <entt/entity/registry.hpp>
 
 namespace game_engine::infrastructure {
-
     class EcsManager {
     public:
-        domain::Entity::Id createEntity();
-        void destroyEntity(domain::Entity::Id entityId);
+        EcsManager() = default;
+
+        ~EcsManager() = default;
+
+        entt::entity createEntity() {
+            return m_registry.create();
+        }
+
+        void destroyEntity(const entt::entity &entity) {
+            m_registry.destroy(entity);
+        }
 
         template<typename T, typename... Args>
-        void addComponent(domain::Entity::Id entityId, Args&&... args);
+        T &addComponent(entt::entity entity, Args &&... args) {
+            return m_registry.emplace<T>(entity, std::forward<Args>(args)...);
+        }
 
         template<typename T>
-        void removeComponent(domain::Entity::Id entityId);
+        void removeComponent(const entt::entity &entity) {
+            m_registry.remove<T>(entity);
+        }
 
         template<typename T>
-        T* getComponent(domain::Entity::Id entityId);
+        T &getComponent(const entt::entity &entity) {
+            return m_registry.get<T>(entity);
+        }
 
-        void addSystem(std::unique_ptr<domain::System> system);
-        void update(float deltaTime);
+        entt::registry &getRegistry() {
+            return m_registry;
+        }
 
     private:
-        std::vector<domain::Entity> m_entities;
-        std::unordered_map<domain::Entity::Id, std::vector<std::unique_ptr<domain::Component>>> m_components;
-        std::vector<std::unique_ptr<domain::System>> m_systems;
+        entt::registry m_registry;
     };
-
 } // namespace game_engine::infrastructure
