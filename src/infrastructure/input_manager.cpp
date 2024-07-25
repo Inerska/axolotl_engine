@@ -1,4 +1,5 @@
-#include <../../include/game_engine/infrastructure/input_manager.hpp>
+#include "game_engine/infrastructure/input_manager.hpp"
+
 #include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
 

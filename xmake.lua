@@ -18,6 +18,8 @@ target("game_engine")
     add_headerfiles("include/(game_engine/**.hpp)")
     add_includedirs("include", {public = true})
     add_packages("glfw", "glad", "glm", "spdlog", "boost/di", "entt")
+    add_rules("plugin.cmake.autoreload")
+
 
 target("game_engine_exe")
     set_kind("binary")
@@ -43,3 +45,39 @@ end)
 if is_mode("debug") then
     add_cxflags("-Wall", "-Wextra", "-Werror", "-Wpedantic")
 end
+
+rule("plugin.cmake.autoreload")
+set_kind("project")
+after_build(function (target)
+    import("core.project.config")
+    import("core.project.depend")
+    import("core.project.project")
+    import("core.base.option")
+
+    local verbose = option.get("verbose")
+
+    if not os.exec("cmake --version") then
+        if verbose then
+            print("CMake not found. Skipping CMake reload.")
+        end
+        return
+    end
+
+    if not os.isfile("CMakeLists.txt") then
+        if verbose then
+            print("CMakeLists.txt not found. Skipping CMake reload.")
+        end
+        return
+    end
+
+    local dependfile = path.join(config.buildir(), ".gens", "rules", "plugin.cmake.autoreload.d")
+    depend.on_changed(function ()
+        print("Changes detected. Reloading CMakeFiles...")
+        local result = os.exec("cmake .")
+        if result == 0 then
+            print("CMakeFiles successfully reloaded after changes")
+        else
+            print("Error occurred while reloading CMakeFiles")
+        end
+    end, {dependfile = dependfile, files = project.allfiles()})
+end)

@@ -91,6 +91,7 @@ target_sources(game_engine PRIVATE
     include/game_engine/infrastructure/ecs_manager.hpp
     include/game_engine/infrastructure/input_manager.hpp
     include/game_engine/infrastructure/renderer.hpp
+    include/game_engine/infrastructure/test.hpp
     include/game_engine/domain/system.hpp
     include/game_engine/domain/component.hpp
     include/game_engine/domain/entity.hpp
@@ -254,8 +255,6 @@ target_link_options(tests PRIVATE
     -lz
 )
 target_sources(tests PRIVATE
-    tests/core/game_loop_tests.cpp
-    tests/input/input_manager_tests.cpp
-    tests/graphics/renderer_tests.cpp
+    tests/core/test.cpp
 )
 
